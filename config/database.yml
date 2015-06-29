@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: leaflet_development
   pool: 5
-  username: Erick_laptop
+  username: roberthernandez
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: leaflet_test
   pool: 5
-  username: Erick_laptop
+  username: roberthernandez
   password:
 
 production:
@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: leaflet_production
   pool: 5
-  username: Erick_laptop
+  username: roberthernandez
   password:
