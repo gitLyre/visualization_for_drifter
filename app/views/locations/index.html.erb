@@ -26,6 +26,8 @@
       <th><%= model_class.human_attribute_name(:sensor_name) %></th>
       <th><%= model_class.human_attribute_name(:sensor_data) %></th>
       <th><%= model_class.human_attribute_name(:battery_level) %></th>
+      <th><%= model_class.human_attribute_name(:gps_time) %></th>
+      <th><%= model_class.human_attribute_name(:gps_tower) %></th>gps_time
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -41,6 +43,8 @@
         <td><%= location.sensor_name %></td>
         <td><%= location.sensor_data %></td>
         <td><%= location.battery_level %></td>
+        <td><%= location.gps_time %></td>
+        <td><%= location.gps_tower %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_location_path(location), :class => 'btn btn-mini' %>
