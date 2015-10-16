@@ -15,8 +15,8 @@ gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
-# Use puma as the app server
-gem 'puma'
+# Use thin as the app server
+gem 'thin'
 gem "rack-timeout"
 gem 'jquery_mobile_rails'
 
