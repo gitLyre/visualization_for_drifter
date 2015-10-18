@@ -7,14 +7,22 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
- *= require_self
- *= require scaffolds.css.scss
  *= require bootstrap_and_overrides
+ *= require_self
  *= require locations.css.scss
  */
+
+$black: #151515;
+$blue: blue;
+$navy-blue: #003366;
+
+html{
+	font-family: 'Roboto', sans-serif;
+}
+
 #header{
 	color:yellow;
-	background-color:#151515;
+	background-color: $black;
 	height: 2em;
 	font-size: 2em;
 	border-radius: 2em;
@@ -23,9 +31,22 @@
 
 }
 #footer-navbar{
-	background-color:#003366;
+	background-color: $navy-blue;
 	font-size: 2em;
 	border-radius: 2em;
 	width: 50%;
+}
+
+a{
+	color: $black;
+	text-decoration: none;
+	&:hover{
+		color: $blue;
+		text-decoration: underline;
+		background: none;
+	}
+	&:visited{
+		color: $black;
+	}
 }
 

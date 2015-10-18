@@ -1,5 +1,11 @@
 <%= form_for @location, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
+    <%= f.label :drifter_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :drifter_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :latitude, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :latitude, :class => 'text_field' %>
@@ -12,27 +18,39 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :time, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :time, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :valid_input, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :valid_input, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
     <%= f.label :gps_speed, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :gps_speed, :class => 'text_field' %>
     </div>
+  </div>  
+  <div class="control-group">
+    <%= f.label :gps_time, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gps_time, :class => 'text_field' %>
+    </div>
   </div>
   <div class="control-group">
-    <%= f.label :drifter_name, :class => 'control-label' %>
+    <%= f.label :gps_tower, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :drifter_name, :class => 'text_field' %>
+      <%= f.text_field :gps_tower, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :sensor_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sensor_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :sensor_data, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :sensor_data, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :battery_level, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :battery_level, :class => 'text_field' %>
     </div>
   </div>
 
