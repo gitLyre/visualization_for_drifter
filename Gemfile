@@ -17,9 +17,9 @@ gem 'turbolinks'
 
 # Use thin as the app server
 gem 'thin'
+
 gem "rack-timeout"
 gem 'jquery_mobile_rails'
-
 gem 'twitter-bootstrap-rails' #added the static bootstrap css
 gem 'less'
 gem 'less-rails'
