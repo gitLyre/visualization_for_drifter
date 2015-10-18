@@ -130,6 +130,16 @@ class LocationsController < ApplicationController
     end
   end
 
+  def import
+    if params[:file].blank?
+      flash[:alert] = "You have to attach something to Import."
+      redirect_to locations_path
+      return
+    end
+    Location.import(params[:file])
+    redirect_to locations_path, notice: "Locations imported."
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_location

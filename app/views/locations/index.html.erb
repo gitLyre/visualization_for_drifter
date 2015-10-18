@@ -12,6 +12,17 @@
     <%= link_to "Excel", locations_path(format: "xls") %>
   </h3>
   <h3>
+   <% if flash[:alert] %>
+    <div class="alert alert-warning"><%= flash[:alert] %></div>
+   <% end %>
+    Import:
+    <%= form_tag import_locations_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import", :class => "btn btn-info" %>
+    <% end %>
+  </h3>
+  <br>
+  <h3>
     Elements recorded so far: <%= count_drift %>
   </h3>
   <table class="table table-striped table-condensed">
