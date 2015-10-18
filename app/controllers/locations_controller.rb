@@ -2,11 +2,6 @@ class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
   skip_before_filter  :verify_authenticity_token
 
-  def purge
-    Location.delete_all
-    redirect_to locations_path()
-  end
-
 
   # GET /locations
   # GET /locations.json
@@ -79,24 +74,71 @@ class LocationsController < ApplicationController
     end
   end
 
+  # custom ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  #Wipes out the DB
+  def purge
+    Location.delete_all
+    redirect_to locations_path
+  end
+
+  #Handles the incoming Data to be added to DB
+  def import
+    if params[:file].blank?
+      flash[:alert] = "You have to attach something to Import."
+      redirect_to locations_path
+      return
+    end
+    Location.import(params[:file])
+    redirect_to locations_path, notice: "Locations imported."
+  end
+
+  # Loads the root path
+  def home
+  end
+
+  # After the user sets all the drifters and starting location, loads up the drifters
+  def set_experiment
+    @drifters = params["drifter"] unless params["drifter"].blank?
+    @latitude = params["latitude"] unless params["latitude"].blank?
+    @longitude = params["longitude"] unless params["longitude"].blank?
+    @show = !@drifters.blank? && !@latitude.blank? && !@longitude.blank?
+    drifter
+  end
+
+  # Loads the Drifters based on which numbers selected, gets the newest top 5
   def drifter
-    if params[:val].present?
-      @id = params[:id]
-      @l0 = Location.find_all_by_drifter_name("Drifter #"+@id.to_s)
-    elsif params[:id].present?
-      @id = params[:id]
-      @specific = true
-      @l = Location.find_all_by_drifter_name("Drifter #"+@id.to_s)
-      @l0 = @l.last
+    if @drifters && @drifters.any?
+      @l0 = []
+      @drifters.each do | num |
+        @l0+= Location.where(drifter_name: "Drifter #"+num).order(created_at: :asc).limit(5)
+      end
     else
-      @l0 = Location.all
+      @l0 = Location.where(drifter_name: "Drifter #1").order(created_at: :asc).limit(5)
+    end
+    render :drifter
+  end
+
+  # Called from getScript to update the values of the drifter
+  def reload
+    @drifters = JSON.parse(params["drifter"]) unless params["drifter"].blank?
+    if @drifters && @drifters.any?
+      @l0 = []
+      @drifters.each do | num |
+        @l0+= Location.where(drifter_name: "Drifter #"+num).order(created_at: :asc).limit(5)
+      end
     end
   end
 
-  def simulation
-    @l0 = Location.all
+  # Needs rework
+  def history
+    @l0 = Location.where(drifter_name: "Drifter #1").order(created_at: :asc).limit(5)
+    @latitude = @l0.first.latitude
+    @longitude = @l0.first.longitude
+    @show = true
   end
 
+  # Needs rework
   def menu
     p "in menu"
     if params.to_s.include? "checkbox"
@@ -110,9 +152,7 @@ class LocationsController < ApplicationController
     p session[:drifter]
   end
 
-  def history
-    @l0 = Location.all
-  end
+  # Needs rework
 
   def live
     if params[:val].present?
@@ -130,15 +170,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  def import
-    if params[:file].blank?
-      flash[:alert] = "You have to attach something to Import."
-      redirect_to locations_path
-      return
-    end
-    Location.import(params[:file])
-    redirect_to locations_path, notice: "Locations imported."
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

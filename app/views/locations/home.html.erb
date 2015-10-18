@@ -1,0 +1,73 @@
+<div class="container" id="home">
+  <div class="row text-center">
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2> Its time to start your experiements! </h2>
+    <p> Drifters are marked by icons to represent their position </p>
+    <p> After all this is set, you will be able to see everything live </p>
+    <p> First, where do you want to start?</p>
+    <p> I can accept either a starting Lat/Lon or a location if you like</p>
+      <div class="home_map">
+        <div id="map"></div>
+        <br>
+        <div id="floating-panel">
+            <%= text_field_tag "address", "Sydney, NSW" %>
+            <%= submit_tag "Geocode", :class => "btn btn-info", :id => "submit" %>
+        </div>
+        <br>
+      </div>
+      <%= form_tag set_experiment_locations_path do %>
+        <%= text_field_tag "latitude", "", :placeholder => "latitude", :id => "lat" %>
+        <%= text_field_tag "longitude", "", :placeholder => "longitude", :id => "log" %>
+        <p>Select which Drifters you would like to track today</p>
+        <!-- number here --> 
+        <div class="inline-me"> 
+          <% (1..20).each do |value| %>
+            <%= label_tag "#{value}" %></li>
+            <%= check_box_tag "drifter[]", "#{value}",false %>
+          <% end %>
+        </div>
+        <br>
+        <%= submit_tag "Start Drifter Tracker!", :class => "btn btn-success" %>
+      <% end %>
+    <br>
+    <br>
+  </div>
+</div>
+
+<!-- javascript part -->
+<script>
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: {lat: -34.397, lng: 150.644}
+  });
+  var geocoder = new google.maps.Geocoder();
+
+  document.getElementById('submit').addEventListener('click', function() {
+    geocodeAddress(geocoder, map);
+  });
+}
+
+function geocodeAddress(geocoder, resultsMap) {
+  var address = document.getElementById('address').value;
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      resultsMap.setCenter(results[0].geometry.location);
+      var locs = results[0].geometry.location
+      $('#log').val(locs.lng());
+      $('#lat').val(locs.lat());
+      var marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEmtBoQtpajL_luBCc05A5v8-Jvy5hYUw&signed_in=true&callback=initMap" async defer></script>

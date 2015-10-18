@@ -15,3 +15,4 @@
 //= require bootstrap.js.coffee
 //= require turbolinks
 //= require locations.js
+

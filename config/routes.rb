@@ -2,6 +2,9 @@ Leaflet::Application.routes.draw do
   resources :locations do
     collection do
       post :import
+      get :home
+      post :set_experiment
+      get :reload
     end
   end
 
@@ -9,8 +12,13 @@ Leaflet::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'locations#drifter'
+   root 'locations#home'
    delete 'purge' => 'locations#purge'
+   post 'data' => 'locations#create'
+   get "drifter" => 'locations#drifter', :as => "drifter"
+   get "menu" => 'locations#menu', :as => "menu"
+   get "history" => "locations#history", :as => "history"
+   get "live" => "locations#live", :as => "live"
 
 
   # Example of regular route:
@@ -61,10 +69,4 @@ Leaflet::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  post 'data' => 'locations#create'
-  get "drifter" => 'locations#drifter', :as => "drifter"
-  get "simulation" => 'locations#simulation', :as => "simulation"
-  get "menu" => 'locations#menu', :as => "menu"
-  get "history" => "locations#history", :as => "history"
-  get "live" => "locations#live", :as => "live"
 end

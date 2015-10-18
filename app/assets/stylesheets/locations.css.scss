@@ -1,34 +1,42 @@
-// Place all the styles related to the locations controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin centering{
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+//drifter page
 #map {
   height: 1000px;
 }
-
 .leaflet-map-pane{
-	z-index: 2! important;
+  z-index: 2! important;
 }
 .leaflet-google-layer{
-	z-index:1 !important;
+  z-index:1 !important;
 }
 
-#sidebar{
-  position:absolute;
-  right:0px;
-  bottom:0px;
-  top:0px;
-  width:400px;
-  height:100%;
-  background-color:#005199;
+//home page
+#home{
+  .home_map{
+    width: 400px;
+    height: 10%;
+    @include centering;
+    #map{
+      height: 300px;
+    }
+  }
+  .inline-me{
+    label{
+      display: inline;
+    }
+  }
+  
 }
 
+//index show page
 #index, #show{
   width: 80%;
   padding-left: 100px;
 }
 
-
-#explanation{
-	color:yellow;
-}
 

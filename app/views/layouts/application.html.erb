@@ -7,16 +7,15 @@
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <!-- leaflet css and java script -->
-    <%= stylesheet_link_tag href="//cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" , media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "//cdn.leafletjs.com/leaflet-0.7.2/leaflet.js" , "data-turbolinks-track" => true %>
-    <!-- fontmarker and integration to leaflet -->
-    <%= stylesheet_link_tag href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"  %>
-    <link rel="stylesheet" href="dist/leaflet.awesome-markers.css">
-    <link href='//fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
-    <script src="dist/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+    <script src="//cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
     <!-- integrating google map and leaflet -->
     <%= javascript_include_tag "//matchingnotes.com/javascripts/leaflet-google.js", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "//maps.google.com/maps/api/js?v=3.2&sensor=false", "data-turbolinks-track" => true %>
+    <!-- fontmarker and integration to leaflet -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">    <%= stylesheet_link_tag "awesome" %>
+    <%= javascript_include_tag "awesome.js" %>
+    <!-- font -->
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
     <%= csrf_meta_tags %>
   </head>
   <body id="<%= params[:controller]+"-"+params[:action] %>">

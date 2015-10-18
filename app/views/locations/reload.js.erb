@@ -1,0 +1,13 @@
+removeAllMarkers();
+<% if @l0 %>
+  <% name_change = nil %>
+    <% @l0.each do |location| %>
+      <% name = location.drifter_name %>
+
+      <% time = location.created_at.strftime('%b %d, %Y %l:%M:%S %p') %>
+      <% speed = location.gps_speed %>
+      var marker = L.marker([ <%= location.latitude%> , <%= location.longitude%>], {icon: rocket });
+      marker.addTo(map).bindPopup("<b>"+"<%= name %>"+", "+"<%= time %>"+". My current speed is "+"<%= speed %>"+"</b>").openPopup();
+      markers.push(marker);
+  <% end%>
+<% end %>

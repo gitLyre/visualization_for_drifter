@@ -8,13 +8,13 @@
       <!-- Collect the nav links for footer -->
       <div class="collapse navbar-collapse" id="footer-navbar">
         <ul class="nav navbar-nav navbar-left">
-          <li><%= link_to image_tag("drifter.png"), drifter_path(:id => 1), class: "btn btn-inverse"%></li>
-          <li><%= link_to "History", "/history", class: "btn btn-inverse" %></li>
-          <li><%= link_to "Data", "/locations", class: "btn btn-inverse" %></li>
+          <li><%= link_to "Track New Drifters", root_path, class: "btn btn-inverse" %></li>
+<!--           <li><%= link_to "History", "/history", class: "btn btn-inverse" %></li>
+ -->          <li><%= link_to "Data", "/locations", class: "btn btn-inverse" %></li>
             <% if mobile_device? %>
           <li> <%= link_to "Full Site", root_path(:mobile => 0 ), :rel => "external",class: "btn btn-inverse" %></li>
             <% else %>
-          <li><%= link_to "Mobile Site", params.merge(:mobile => 1 ),class: "btn btn-inverse"%></li>
+<!--           <li><%= link_to "Mobile Site", params.merge(:mobile => 1 ),class: "btn btn-inverse"%></li> -->
             <% end %>
         </ul>
         <button type="button" class="navbar-toggle btn btn-primary" data-toggle="collapse" data-target="#footer-navbar">

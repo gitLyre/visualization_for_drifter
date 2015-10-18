@@ -15,6 +15,7 @@
 $black: #151515;
 $blue: blue;
 $navy-blue: #003366;
+$yellow: yellow;
 
 html{
 	font-family: 'Roboto', sans-serif;
@@ -28,8 +29,12 @@ html{
 	border-radius: 2em;
 	margin: auto;
 	width: 25%;
+	a{
+		color: $yellow;
+	}
 
 }
+
 #footer-navbar{
 	background-color: $navy-blue;
 	font-size: 2em;
@@ -49,4 +54,5 @@ a{
 		color: $black;
 	}
 }
+
 
