@@ -24,6 +24,9 @@ gem 'twitter-bootstrap-rails' #added the static bootstrap css
 gem 'less'
 gem 'less-rails'
 gem 'libv8'
+gem 'roo'
+gem 'iconv'
+gem 'zip-zip'
 
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
