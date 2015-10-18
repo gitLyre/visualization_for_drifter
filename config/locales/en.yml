@@ -21,3 +21,16 @@
 
 en:
   hello: "Hello world"
+  model:
+    name: "Location" 
+    id: "Id"
+    d_name: "Drifter Name"
+    lat: "Latitude"
+    long: "Longitude"
+    created: "Created At"
+    speed: "GPS Speed (m/s)"
+    s_name: "Sensor Name"
+    s_dat: "Sensor Data"
+    battery: "Battery Level"
+    g_time: "GPS Time"
+    g_tower: "GPS Tower"

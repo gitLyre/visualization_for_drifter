@@ -1,60 +1,61 @@
-<%- model_class = Location -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-  <h4><%= link_to "Purge Database", purge_path,
-                                                :confirm => 'Pressing this will remove the whole database. Wish to continue?',
-                                                :method => :delete,
-                                                :class => 'btn btn-mini btn-danger' %>
-</div>
-<p>
-  Download:
-  <%= link_to "CSV", locations_path(format: "csv") %> |
-  <%= link_to "Excel", locations_path(format: "xls") %>
-</p>
-<p>
-  Elements recorded so far: <%= count_drift %>
-</p>
-<table class="table table-striped table-condensed">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:drifter_name) %></th>
-      <th><%= model_class.human_attribute_name(:latitude) %></th>
-      <th><%= model_class.human_attribute_name(:longitude) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%= model_class.human_attribute_name(:gps_speed) %></th>
-      <th><%= model_class.human_attribute_name(:sensor_name) %></th>
-      <th><%= model_class.human_attribute_name(:sensor_data) %></th>
-      <th><%= model_class.human_attribute_name(:battery_level) %></th>
-      <th><%= model_class.human_attribute_name(:gps_time) %></th>
-      <th><%= model_class.human_attribute_name(:gps_tower) %></th>gps_time
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @locations.each do |location| %>
+<div id="index">
+  <div class="page-header">
+    <h1><%=t '.name', :default => t("model.name") %></h1>
+    <h4><%= link_to "Purge Database", purge_path,
+                                                  :confirm => 'Pressing this will remove the whole database. Wish to continue?',
+                                                  :method => :delete,
+                                                  :class => 'btn btn-mini btn-danger' %>
+  </div>
+  <h3>
+    Download:
+    <%= link_to "CSV", locations_path(format: "csv") %> |
+    <%= link_to "Excel", locations_path(format: "xls") %>
+  </h3>
+  <h3>
+    Elements recorded so far: <%= count_drift %>
+  </h3>
+  <table class="table table-striped table-condensed">
+    <thead>
       <tr>
-        <td><%= link_to location.id, location_path(location) %></td>
-        <td><%= location.drifter_name %></td>
-        <td><%= location.latitude %></td>
-        <td><%= location.longitude %></td>
-        <td><%= location.created_at.strftime('%b %d, %Y %l:%M:%S %p') %></td>
-        <td><%= location.gps_speed %></td>
-        <td><%= location.sensor_name %></td>
-        <td><%= location.sensor_data %></td>
-        <td><%= location.battery_level %></td>
-        <td><%= location.gps_time %></td>
-        <td><%= location.gps_tower %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_location_path(location), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      location_path(location),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
+        <th><%= t '.id', :default => t("model.id") %></th>
+        <th><%= t '.d_name', :default => t("model.d_name") %></th>
+        <th><%= t '.lat', :default => t("model.lat")  %></th>
+        <th><%= t '.long', :default => t("model.long")  %></th>
+        <th><%= t '.created', :default => t("model.created")  %></th>
+        <th><%= t '.speed', :default => t("model.speed")  %></th>
+        <th><%= t '.s_name', :default => t("model.s_name")  %></th>
+        <th><%= t '.s_dat', :default => t("model.s_dat")  %></th>
+        <th><%= t '.battery', :default => t("model.battery")  %></th>
+        <th><%= t '.g_time', :default => t("model.g_time")  %></th>
+        <th><%= t '.g_tower', :default => t("model.g_tower")  %></th>
+        <th><%= t '.actions', :default => t("helpers.actions") %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @locations.each do |location| %>
+        <tr>
+          <td><%= link_to location.id, location_path(location) %></td>
+          <td><%= location.drifter_name %></td>
+          <td><%= location.latitude %></td>
+          <td><%= location.longitude %></td>
+          <td><%= location.created_at.strftime('%b %d, %Y %l:%M:%S %p') %></td>
+          <td><%= location.gps_speed %></td>
+          <td><%= location.sensor_name %></td>
+          <td><%= location.sensor_data %></td>
+          <td><%= location.battery_level %></td>
+          <td><%= location.gps_time %></td>
+          <td><%= location.gps_tower %></td>
+          <td>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                        edit_location_path(location), :class => 'btn btn-mini' %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                        location_path(location),
+                        :method => :delete,
+                        :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                        :class => 'btn btn-mini btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
