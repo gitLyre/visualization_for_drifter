@@ -4,7 +4,6 @@
 			var map = new L.Map('map', {center: new L.LatLng(<%= first_lat%>-0.36093, <%= first_long%>+.26494), zoom: 16});
 			//0.36093, -122.25803
       		var googleLayer = new L.Google('SATELLITE');
-      		map.addLayer(googleLayer);
 			 var adjust = L.AwesomeMarkers.icon({
 			    icon: 'fa-adjust',
 			    prefix: 'fa',
@@ -111,20 +110,91 @@
 			    markerColor:'orange'
 			  });
 			<% if @specific %>
-				<% valid = @l0.valid_input.to_s %>
-				<% name = @l0.drifter_name.to_s %>
-				<% time = @l0.created_at.strftime('%b %d, %Y %l:%M:%S %p') %>
-				<% speed = @l0.gps_speed %>
-				  L.marker([ <%= @l0.latitude%> , <%= @l0.longitude%>], {icon: smile, riseOnHover:true}).addTo(map).bindPopup("<b>"+"<%= name %>"+", "+"<%= time %>"+". My current speed is "+"<%= speed %>"+"</b>").openPopup();
-			<% else %>
-				<% @l0.each do |location| %>
-				<% valid = location.valid_input.to_s %>
-				<% name = location.drifter_name.to_s %>
-				<% time = location.created_at.strftime('%b %d, %Y %l:%M:%S %p') %>
-				<% speed = location.gps_speed %>
-				  L.marker([ <%= location.latitude%> , <%= location.longitude%>], {icon: smile, riseOnHover:true}).addTo(map).bindPopup("<b>"+"<%= name %>"+", "+"<%= time %>"+". My current speed is "+"<%= speed %>"+"</b>").openPopup();
+				<% if @l0.length>0 %>
+					map.addLayer(googleLayer);
+					<% @l0.each do |location| %>
+						<% valid = location.valid_input.to_s %>
+						<% name = location.drifter_name.to_s %>
+						<% time = location.created_at.strftime('%b %d, %Y %l:%M:%S %p') %>
+						<% speed = location.gps_speed %>
+						<% num = @id %>
+						var numberedIcon = L.AwesomeMarkers.icon({
+							 icon: '',
+							 prefix: 'fa',
+							 markerColor:'orange',
+							 html: <%= num %>
+						});
+						<% if ((!location.latitude.nil?) && (!location.longitude.nil?)) %>
+							L.marker([ <%= location.latitude%> , <%= location.longitude%>], {icon: numberedIcon, riseOnHover:true}).addTo(map).bindPopup("<b>"+"<%= name %>"+", "+"<%= time %>"+". My current speed is "+"<%= speed %>"+"</b>").openPopup();
+						<% end%>
+					<% end%>
 				<% end%>
-			<% end %>
+				var pointList = [];
+				<% if @l1.length>0 %>
+					<% @l1.each do |location| %>
+						<% if ((!location.latitude.nil?) && (!location.longitude.nil?)) %>
+							var pointA = new L.LatLng(<%=location.latitude%>, <%=location.longitude%>);
+							pointList.push(pointA);
+						<% end%>
+					<% end%>
+					var firstpolyline = new L.Polyline(pointList, {
+					color: 'orange',
+					weight: 3,
+					opacity: 0.5,
+					smoothFactor: 1
+					});
+					firstpolyline.addTo(map);
+				<% end%>
+
+				<% else %>
+					var pointList = [];
+					var indice = 0;
+					var driftersListNumber = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+					var driftersListColors = ['blue','green','red','purple','orange','blue','black','green','red','black','blue','green','red','orange','purple','blue','black','green','red','black'];
+					<% @l0List.each do |l0Element| %>
+						<% if l0Element.length>0 %>
+						  map.addLayer(googleLayer);
+							<% l0Element.each do |location| %>
+								<% valid = location.valid_input.to_s %>
+								<% name = location.drifter_name.to_s %>
+								<% time = location.created_at.strftime('%b %d, %Y %l:%M:%S %p') %>
+								<% speed = location.gps_speed %>
+								<% if ((!location.latitude.nil?) && (!location.longitude.nil?)) %>
+									var pointA = new L.LatLng(<%=location.latitude%>, <%=location.longitude%>);
+									pointList.push(pointA);
+									var numberedIcon = L.AwesomeMarkers.icon({
+										 icon: '',
+										 prefix: 'fa',
+										 markerColor:driftersListColors[indice],
+										 html: driftersListNumber[indice]
+									});
+									L.marker([ <%= location.latitude%> , <%= location.longitude%>], {icon: numberedIcon, riseOnHover:true}).addTo(map).bindPopup("<b>"+"<%= name %>"+", "+"<%= time %>"+". My current speed is "+"<%= speed %>"+"</b>").openPopup();
+								<% end %>
+							<% end %>
+						<% end %>
+						indice = indice + 1;
+					<% end%>
+					var indice = 0;
+					<% @l1List.each do |l1Element| %>
+						var pointList = [];
+						<% if l1Element.length>0 %>
+							<% l1Element.each do |location| %>
+								<% if ((!location.latitude.nil?) && (!location.longitude.nil?)) %>
+									var pointA = new L.LatLng(<%=location.latitude%>, <%=location.longitude%>);
+									pointList.push(pointA);
+								<% end %>
+							<% end%>
+							var firstpolyline = new L.Polyline(pointList, {
+							color: driftersListColors[indice],
+							weight: 3,
+							opacity: 0.7,
+							smoothFactor: 1
+							});
+							firstpolyline.addTo(map);
+						<% end%>
+						indice = indice + 1;
+					<% end%>
+				<% end %>
 
 			var popup = L.popup();
 			function onMapClick(e) {
@@ -137,6 +207,5 @@
 	</script>
 </div>
 <% else %>
-Please wait for first data point to come in...
+	Please wait for first data point to come in...
 <% end %>
-

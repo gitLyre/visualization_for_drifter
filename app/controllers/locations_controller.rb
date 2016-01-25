@@ -86,10 +86,35 @@ class LocationsController < ApplicationController
     elsif params[:id].present?
       @id = params[:id]
       @specific = true
-      @l = Location.find_all_by_drifter_name("Drifter #"+@id.to_s)
-      @l0 = @l.last
+      @nb=1
+      if params[:nb].present?
+        @nb=params[:nb]
+      end
+      @l0 = Location.where("drifter_name = 'Drifter #"+@id.to_s+"'").order(created_at: :desc).limit(@nb.to_i)
+      @l1 = Location.where("drifter_name = 'Drifter #"+@id.to_s+"'").order(created_at: :desc).limit(@nb.to_i+100)
+    elsif params[:nb].present?
+      @specific = false
+      @nb = params[:nb]
+      @driftersListNumber = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+      @l0List = Array[]
+      @l1List = Array[]
+      @driftersListNumber.each do |i|
+        @l0 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(created_at: :desc).limit(@nb.to_i)
+        @l0List.push(@l0)
+        @l1 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(created_at: :desc).limit(@nb.to_i+30)
+        @l1List.push(@l1)
+      end
     else
-      @l0 = Location.all
+      @specific = false
+      @driftersListNumber = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+      @l0List = Array[]
+      @l1List = Array[]
+      @driftersListNumber.each do |i|
+        @l0 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(created_at: :desc).limit(1)
+        @l0List.push(@l0)
+        @l1 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(created_at: :desc).limit(30)
+        @l1List.push(@l1)
+      end
     end
   end
 
@@ -126,7 +151,7 @@ class LocationsController < ApplicationController
     elsif params[:action] =="live"
       @l0 = Location.first
     else
-      @l0 =Location.all
+      @l0 = Location.all
     end
   end
 
