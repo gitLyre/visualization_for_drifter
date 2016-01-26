@@ -11,25 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805094335) do
+ActiveRecord::Schema.define(version: 2016012614460000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "locations", force: true do |t|
+    t.text     "drifter_name"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "time"
+    t.datetime "gps_time"
+    t.datetime "time"
     t.boolean  "valid_input"
     t.float    "gps_speed"
-    t.text     "drifter_name"
+    t.text     "sensor_name"
+    t.float    "sensor_data"
+    t.float    "temp"
+    t.float    "battery_level"
+    t.float    "gps_tower"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "sensor_data"
-    t.text     "sensor_name"
-    t.text     "battery_level"
-    t.text     "gps_tower"
-    t.text     "gps_time"
   end
 
 end

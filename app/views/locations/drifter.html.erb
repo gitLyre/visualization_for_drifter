@@ -1,7 +1,7 @@
 <% if first_long %>
 <div id="map">
 	<script>
-			var map = new L.Map('map', {center: new L.LatLng(<%= first_lat%>-0.36093, <%= first_long%>+.26494), zoom: 16});
+			var map = new L.Map('map', {center: new L.LatLng(<%= first_lat%>-0.36093, <%= first_long%>+0.26494), zoom: 16});
 			//0.36093, -122.25803
       		var googleLayer = new L.Google('SATELLITE');
 			 var adjust = L.AwesomeMarkers.icon({
@@ -115,7 +115,7 @@
 					<% @l0.each do |location| %>
 						<% valid = location.valid_input.to_s %>
 						<% name = location.drifter_name.to_s %>
-						<% time = location.created_at.strftime('%b %d, %Y %l:%M:%S %p') %>
+						<% time = location.gps_time.strftime('%d/%m/%Y %H:%M:%S') %>
 						<% speed = location.gps_speed %>
 						<% num = @id %>
 						var numberedIcon = L.AwesomeMarkers.icon({
@@ -157,7 +157,7 @@
 							<% l0Element.each do |location| %>
 								<% valid = location.valid_input.to_s %>
 								<% name = location.drifter_name.to_s %>
-								<% time = location.created_at.strftime('%b %d, %Y %l:%M:%S %p') %>
+								<% time = location.gps_time.strftime('%d/%m/%Y %H:%M:%S') %>
 								<% speed = location.gps_speed %>
 								<% if ((!location.latitude.nil?) && (!location.longitude.nil?)) %>
 									var pointA = new L.LatLng(<%=location.latitude%>, <%=location.longitude%>);

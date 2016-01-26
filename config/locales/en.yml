@@ -22,7 +22,7 @@
 en:
   hello: "Hello world"
   model:
-    name: "Location" 
+    name: "Location"
     id: "Id"
     d_name: "Drifter Name"
     lat: "Latitude"
@@ -34,3 +34,4 @@ en:
     battery: "Battery Level"
     g_time: "GPS Time"
     g_tower: "GPS Tower"
+    temp: "Temperature"

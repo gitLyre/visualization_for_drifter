@@ -11,7 +11,7 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.order(created_at: :desc)
+    @locations = Location.order(gps_time: :desc)
     respond_to do |format|
       format.html
       format.csv { send_data @locations.to_csv }
@@ -43,6 +43,15 @@ class LocationsController < ApplicationController
         Location.new(params)
       else
         Location.new()
+      end
+      if @location.gps_time.nil?
+        if @location.time.nil?
+          @location.gps_time = @location.created_at
+        else
+          @location.gps_time = @location.time
+        end
+      else
+        @location.gps_time = DateTime.strptime(@location.gps_time,'%d/%m/%Y %H:%M:%S')
       end
     respond_to do |format|
       if @location.save
@@ -87,21 +96,29 @@ class LocationsController < ApplicationController
       @id = params[:id]
       @specific = true
       @nb=1
+      @prof=100
       if params[:nb].present?
         @nb=params[:nb]
       end
-      @l0 = Location.where("drifter_name = 'Drifter #"+@id.to_s+"'").order(created_at: :desc).limit(@nb.to_i)
-      @l1 = Location.where("drifter_name = 'Drifter #"+@id.to_s+"'").order(created_at: :desc).limit(@nb.to_i+100)
+      if params[:prof].present?
+        @prof=params[:prof]
+      end
+      @l0 = Location.where("drifter_name = 'Drifter #"+@id.to_s+"'").order(gps_time: :desc).limit(@nb.to_i)
+      @l1 = Location.where("drifter_name = 'Drifter #"+@id.to_s+"'").order(gps_time: :desc).limit(@nb.to_i+@prof.to_i)
     elsif params[:nb].present?
       @specific = false
       @nb = params[:nb]
       @driftersListNumber = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
       @l0List = Array[]
       @l1List = Array[]
+      @prof=100
+      if params[:prof].present?
+        @prof=params[:prof]
+      end
       @driftersListNumber.each do |i|
-        @l0 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(created_at: :desc).limit(@nb.to_i)
+        @l0 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(gps_time: :desc).limit(@nb.to_i)
         @l0List.push(@l0)
-        @l1 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(created_at: :desc).limit(@nb.to_i+30)
+        @l1 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(gps_time: :desc).limit(@nb.to_i+@prof.to_i)
         @l1List.push(@l1)
       end
     else
@@ -110,9 +127,9 @@ class LocationsController < ApplicationController
       @l0List = Array[]
       @l1List = Array[]
       @driftersListNumber.each do |i|
-        @l0 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(created_at: :desc).limit(1)
+        @l0 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(gps_time: :desc).limit(1)
         @l0List.push(@l0)
-        @l1 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(created_at: :desc).limit(30)
+        @l1 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(gps_time: :desc).limit(50)
         @l1List.push(@l1)
       end
     end

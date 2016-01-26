@@ -28,16 +28,15 @@
   <table class="table table-striped table-condensed">
     <thead>
       <tr>
-        <th><%= t '.id', :default => t("model.id") %></th>
         <th><%= t '.d_name', :default => t("model.d_name") %></th>
         <th><%= t '.lat', :default => t("model.lat")  %></th>
         <th><%= t '.long', :default => t("model.long")  %></th>
-        <th><%= t '.created', :default => t("model.created")  %></th>
+        <th><%= t '.g_time', :default => t("model.g_time")  %></th>
         <th><%= t '.speed', :default => t("model.speed")  %></th>
         <th><%= t '.s_name', :default => t("model.s_name")  %></th>
         <th><%= t '.s_dat', :default => t("model.s_dat")  %></th>
+        <th><%= t '.temp', :default => t("model.temp")  %></th>
         <th><%= t '.battery', :default => t("model.battery")  %></th>
-        <th><%= t '.g_time', :default => t("model.g_time")  %></th>
         <th><%= t '.g_tower', :default => t("model.g_tower")  %></th>
         <th><%= t '.actions', :default => t("helpers.actions") %></th>
       </tr>
@@ -45,16 +44,15 @@
     <tbody>
       <% @locations.each do |location| %>
         <tr>
-          <td><%= link_to location.id, location_path(location) %></td>
           <td><%= location.drifter_name %></td>
           <td><%= location.latitude %></td>
           <td><%= location.longitude %></td>
-          <td><%= location.created_at.strftime('%b %d, %Y %l:%M:%S %p') %></td>
+          <td><%= location.gps_time.strftime('%d/%m/%Y %H:%M:%S') %></td>
           <td><%= location.gps_speed %></td>
           <td><%= location.sensor_name %></td>
           <td><%= location.sensor_data %></td>
+          <td><%= location.temp %></td>
           <td><%= location.battery_level %></td>
-          <td><%= location.gps_time %></td>
           <td><%= location.gps_tower %></td>
           <td>
             <%= link_to t('.edit', :default => t("helpers.links.edit")),

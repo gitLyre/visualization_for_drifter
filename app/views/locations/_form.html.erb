@@ -18,21 +18,15 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :gps_speed, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :gps_speed, :class => 'text_field' %>
-    </div>
-  </div>  
-  <div class="control-group">
     <%= f.label :gps_time, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :gps_time, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :gps_tower, :class => 'control-label' %>
+    <%= f.label :gps_speed, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :gps_tower, :class => 'text_field' %>
+      <%= f.text_field :gps_speed, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
@@ -48,9 +42,21 @@
     </div>
   </div>
   <div class="control-group">
+    <%= f.label :temp, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :temp, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
     <%= f.label :battery_level, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :battery_level, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :gps_tower, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :gps_tower, :class => 'text_field' %>
     </div>
   </div>
 
