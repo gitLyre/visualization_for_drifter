@@ -63,8 +63,8 @@ Leaflet::Application.routes.draw do
   #   end
   post 'data' => 'locations#create'
   get "drifter" => 'locations#drifter', :as => "drifter"
-  get "simulation" => 'locations#simulation', :as => "simulation"
   get "menu" => 'locations#menu', :as => "menu"
-  get "history" => "locations#history", :as => "history"
-  get "live" => "locations#live", :as => "live"
+
+  get "driftermobiles" => 'locations#driftermobiles', :as => "driftermobiles"
+
 end

@@ -19,11 +19,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  # GET /locations/1
-  # GET /locations/1.json
-  def show
-  end
-
   # GET /locations/new
   def new
     @location = Location.new
@@ -135,8 +130,51 @@ class LocationsController < ApplicationController
     end
   end
 
-  def simulation
-    @l0 = Location.all
+  def driftermobiles
+    if params[:val].present?
+      @id = params[:id]
+      @l0 = Location.find_all_by_drifter_name("Drifter #"+@id.to_s)
+    elsif params[:id].present?
+      @id = params[:id]
+      @specific = true
+      @nb=1
+      @prof=100
+      if params[:nb].present?
+        @nb=params[:nb]
+      end
+      if params[:prof].present?
+        @prof=params[:prof]
+      end
+      @l0 = Location.where("drifter_name = 'Drifter #"+@id.to_s+"'").order(gps_time: :desc).limit(@nb.to_i)
+      @l1 = Location.where("drifter_name = 'Drifter #"+@id.to_s+"'").order(gps_time: :desc).limit(@nb.to_i+@prof.to_i)
+    elsif params[:nb].present?
+      @specific = false
+      @nb = params[:nb]
+      @driftersListNumber = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+      @l0List = Array[]
+      @l1List = Array[]
+      @prof=100
+      if params[:prof].present?
+        @prof=params[:prof]
+      end
+      @driftersListNumber.each do |i|
+        @l0 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(gps_time: :desc).limit(@nb.to_i)
+        @l0List.push(@l0)
+        @l1 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(gps_time: :desc).limit(@nb.to_i+@prof.to_i)
+        @l1List.push(@l1)
+      end
+    else
+      @specific = false
+      @driftersListNumber = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+      @l0List = Array[]
+      @l1List = Array[]
+      @driftersListNumber.each do |i|
+        @l0 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(gps_time: :desc).limit(1)
+        @l0List.push(@l0)
+        @l1 =Location.where("drifter_name = 'Drifter #"+i.to_s+"'").order(gps_time: :desc).limit(50)
+        @l1List.push(@l1)
+      end
+    end
   end
 
   def menu
@@ -150,26 +188,6 @@ class LocationsController < ApplicationController
       end }
     end
     p session[:drifter]
-  end
-
-  def history
-    @l0 = Location.all
-  end
-
-  def live
-    if params[:val].present?
-      @id = params[:id]
-      @l0 = Location.find_all_by_drifter_name("Drifter #"+@id.to_s)
-    elsif params[:id].present?
-      @id = params[:id]
-      @specific = true
-      @l = Location.find_all_by_drifter_name("Drifter #"+@id.to_s)
-      @l0 = @l.last
-    elsif params[:action] =="live"
-      @l0 = Location.first
-    else
-      @l0 = Location.all
-    end
   end
 
   def import

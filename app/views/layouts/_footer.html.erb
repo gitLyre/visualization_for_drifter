@@ -8,8 +8,8 @@
       <!-- Collect the nav links for footer -->
       <div class="collapse navbar-collapse" id="footer-navbar">
         <ul class="nav navbar-nav navbar-left">
-          <li><%= link_to image_tag("drifter.png"), drifter_path(:id => 1), class: "btn btn-inverse"%></li>
-          <li><%= link_to "History", "/history", class: "btn btn-inverse" %></li>
+          <li><%= link_to image_tag("drifter.png"), drifter_path(:nb => 1, :prof => 50), class: "btn btn-inverse"%></li>
+          <li><%= link_to "Search", drifter_path(:id => 1 ,:nb => 1, :prof => 150), class: "btn btn-inverse" %></li>
           <li><%= link_to "Data", "/locations", class: "btn btn-inverse" %></li>
             <% if mobile_device? %>
           <li> <%= link_to "Full Site", root_path(:mobile => 0 ), :rel => "external",class: "btn btn-inverse" %></li>

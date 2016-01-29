@@ -1,6 +1,6 @@
 <!-- /footer -->
 <div data-role="footer" data-theme="b" data-position="fixed">
-  You are currently in <%= params[:action] %>
+  You are currently in mobile mode
   <br>
   <%if params[:action] == "live" %>
     Select more here:<%= link_to "Back to menu", menu_path %>
@@ -11,5 +11,6 @@
 	    <%= link_to "Mobile Site", params.merge(:mobile => 1 ),class: "btn btn-success"%>
 	  <% end %>
   <% end %>
-  <%= link_to_function "Back", "history.back()" unless params[:action] == "drifter"%> 
+  <!-- <%= link_to_function "Back", "history.back()" unless params[:action] == "drifter"%> -->
+  <%= link_to "Back", drifter_path%>
 </div>

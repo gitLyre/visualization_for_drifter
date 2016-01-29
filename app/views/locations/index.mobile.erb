@@ -8,28 +8,32 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:drifter_name) %></th>
       <th><%= model_class.human_attribute_name(:latitude) %></th>
       <th><%= model_class.human_attribute_name(:longitude) %></th>
-      <th><%= model_class.human_attribute_name(:time) %></th>
-      <th><%= model_class.human_attribute_name(:valid_input) %></th>
+      <th><%= model_class.human_attribute_name(:gps_time) %></th>
       <th><%= model_class.human_attribute_name(:gps_speed) %></th>
-      <th><%= model_class.human_attribute_name(:drifter_name) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:sensor_name) %></th>
+      <th><%= model_class.human_attribute_name(:sensor_data) %></th>
+      <th><%= model_class.human_attribute_name(:temp) %></th>
+      <th><%= model_class.human_attribute_name(:battery_level) %></th>
+      <th><%= model_class.human_attribute_name(:gps_tower) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @locations.each do |location| %>
       <tr>
-        <td><%= link_to location.id, location_path(location) %></td>
+        <td><%= location.drifter_name %></td>
         <td><%= location.latitude %></td>
         <td><%= location.longitude %></td>
-        <td><%= location.time %></td>
-        <td><%= location.valid_input %></td>
+        <td><%= location.gps_time %></td>
         <td><%= location.gps_speed %></td>
-        <td><%= location.drifter_name %></td>
-        <td><%=l location.created_at %></td>
+        <td><%= location.sensor_name %></td>
+        <td><%= location.sensor_data %></td>
+        <td><%= location.temp %></td>
+        <td><%= location.battery_level %></td>
+        <td><%= location.gps_tower %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_location_path(location), :class => 'btn btn-mini' %>
