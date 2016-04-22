@@ -40,7 +40,27 @@ class LocationsController < ApplicationController
     #    Location.new()
     #  end
     @location = Location.new
-    @location.gps_time = DateTime.parse("04/12/2015 14:08:03 +0100")
+    @location.drifter_name = params[:drifter_name]
+    @location.latitude = params[:latitude]
+    @location.latitude = params[:longitude]
+    @location.gps_time = DateTime.parse(params[:gps_time])
+    @location.gps_speed = params[:gps_speed]
+    if @location.sensor_name != nil
+      @location.sensor_name = params[:sensor_name]
+    end
+    if @location.sensor_data != nil
+      @location.sensor_data = params[:sensor_data]
+    end
+    if @location.battery_level != nil
+      @location.battery_level = params[:battery_level]
+    end
+    if @location.gps_tower != nil
+      @location.gps_tower = params[:gps_tower]
+    end
+    if @location.temp != nil
+      @location.temp = params[:temp]
+    end
+
     #if Location.gps_time.nil?
     #  if Location.time.nil?
     #    Location.gps_time = Location.created_at
