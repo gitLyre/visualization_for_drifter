@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2016012614460000) do
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "gps_time"
-    t.datetime "time"
+    t.text     "time"
     t.boolean  "valid_input"
     t.float    "gps_speed"
     t.text     "sensor_name"

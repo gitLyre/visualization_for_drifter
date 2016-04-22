@@ -43,10 +43,11 @@ class LocationsController < ApplicationController
         if @location.time.nil?
           @location.gps_time = @location.created_at
         else
-          @location.gps_time = @location.time
+          @location.gps_time = DateTime.parse(@location.time)
         end
-      else
-        @location.gps_time = DateTime.strptime(@location.gps_time,'%d/%m/%Y %H:%M:%S')
+      #else
+        #@location.gps_time = DateTime.strptime(@location.gps_time,'%d/%m/%Y %H:%M:%S')
+        #@location.gps_time = DateTime.parse(@location.time)
       end
     respond_to do |format|
       if @location.save

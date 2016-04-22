@@ -13,7 +13,7 @@ class Location < ActiveRecord::Base
 						if loc.time.nil?
 							time_csv = nil
 						else
-							time_csv = loc.time.strftime('%d/%m/%Y %H:%M:%S %z')
+							time_csv = loc.time
 						end
 						csv << [loc.id, loc.drifter_name, loc.latitude, loc.longitude, loc.gps_time.strftime('%d/%m/%Y %H:%M:%S %z'), time_csv, loc.gps_speed, loc.sensor_name, loc.sensor_data, loc.battery_level, loc.gps_tower, loc.temp]
     		end
@@ -33,7 +33,7 @@ class Location < ActiveRecord::Base
 			location.longitude = row["longitude"]
 			location.gps_time = DateTime.parse(row["gps_time"])
 			if !row["time"].nil?
-				location.time = DateTime.parse(row["time"])
+				location.time = row["time"]
 			end
 			location.gps_speed = row["gps_speed"]
 			location.sensor_name = row["sensor_name"]
