@@ -34,21 +34,24 @@ class LocationsController < ApplicationController
     @location =
       if params.has_key? :location
         Location.new(params[:location])
+        @location.gps_time = DateTime.parse("04/12/2015 14:08:03 +0100")
       elsif params.has_key? :drifter_name
-        Location.new(params)
+        Location.new()
+        @location.gps_time = DateTime.parse("04/12/2015 14:08:03 +0100")
       else
         Location.new()
+        @location.gps_time = DateTime.parse("04/12/2015 14:08:03 +0100")
       end
-      if @location.gps_time.nil?
-        if @location.time.nil?
-          @location.gps_time = @location.created_at
-        else
-          @location.gps_time = DateTime.parse(@location.time)
-        end
+    #if @location.gps_time.nil?
+    #  if @location.time.nil?
+    #    @location.gps_time = @location.created_at
+    #  else
+    #    @location.gps_time = DateTime.parse(@location.time)
+    #  end
       #else
         #@location.gps_time = DateTime.strptime(@location.gps_time,'%d/%m/%Y %H:%M:%S')
         #@location.gps_time = DateTime.parse(@location.time)
-      end
+      #end
     respond_to do |format|
       if @location.save
         format.html { redirect_to @location, notice: 'Location was successfully created.' }
