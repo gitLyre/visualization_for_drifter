@@ -31,27 +31,26 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
-    @location =
-      if params.has_key? :location
-        Location.new(params[:location])
-        @location.gps_time = DateTime.parse("04/12/2015 14:08:03 +0100")
-      elsif params.has_key? :drifter_name
-        Location.new()
-        @location.gps_time = DateTime.parse("04/12/2015 14:08:03 +0100")
-      else
-        Location.new()
-        @location.gps_time = DateTime.parse("04/12/2015 14:08:03 +0100")
-      end
-    #if @location.gps_time.nil?
-    #  if @location.time.nil?
-    #    @location.gps_time = @location.created_at
+    #@location =
+    #  if params.has_key? :location
+    #    Location.new(params[:location])
+    #  elsif params.has_key? :drifter_name
+    #    Location.new(params)
     #  else
-    #    @location.gps_time = DateTime.parse(@location.time)
+    #    Location.new()
+    #  end
+    @location = Location.new
+    @location.gps_time = DateTime.parse("04/12/2015 14:08:03 +0100")
+    #if Location.gps_time.nil?
+    #  if Location.time.nil?
+    #    Location.gps_time = Location.created_at
+    #  else
+    #    Location.gps_time = DateTime.parse(Location.time)
     #  end
       #else
         #@location.gps_time = DateTime.strptime(@location.gps_time,'%d/%m/%Y %H:%M:%S')
-        #@location.gps_time = DateTime.parse(@location.time)
-      #end
+      #  Location.gps_time = DateTime.parse(Location.gps_time,'%d/%m/%Y %H:%M:%S')
+      # end
     respond_to do |format|
       if @location.save
         format.html { redirect_to @location, notice: 'Location was successfully created.' }
