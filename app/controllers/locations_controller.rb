@@ -42,7 +42,7 @@ class LocationsController < ApplicationController
     @location = Location.new
     @location.drifter_name = params[:drifter_name]
     @location.latitude = params[:latitude]
-    @location.latitude = params[:longitude]
+    @location.longitude = params[:longitude]
     @location.gps_time = DateTime.parse(params[:gps_time])
     @location.gps_speed = params[:gps_speed]
     if @location.sensor_name != nil
