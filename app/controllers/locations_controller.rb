@@ -45,8 +45,6 @@ class LocationsController < ApplicationController
     @location.longitude = params[:longitude]
     if params[:gps_time] != nil
       @location.gps_time = DateTime.parse(params[:gps_time])
-    else
-      @location.gps_time = Location.created_at
     end
     @location.gps_speed = params[:gps_speed]
     if params[:sensor_name] != nil
