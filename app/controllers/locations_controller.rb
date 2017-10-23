@@ -45,19 +45,19 @@ class LocationsController < ApplicationController
     @location.longitude = params[:longitude]
     @location.gps_time = DateTime.parse(params[:gps_time])
     @location.gps_speed = params[:gps_speed]
-    if @location.sensor_name != nil
+    if params[:sensor_name] != nil
       @location.sensor_name = params[:sensor_name]
     end
-    if @location.sensor_data != nil
+    if params[:sensor_data] != nil
       @location.sensor_data = params[:sensor_data]
     end
-    if @location.battery_level != nil
+    if params[:battery_level] != nil
       @location.battery_level = params[:battery_level]
     end
-    if @location.gps_tower != nil
+    if params[:gps_tower] != nil
       @location.gps_tower = params[:gps_tower]
     end
-    if @location.temp != nil
+    if params[:temp] != nil
       @location.temp = params[:temp]
     end
 
