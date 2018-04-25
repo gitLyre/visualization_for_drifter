@@ -1,0 +1,5 @@
+/etc/apt/apt.conf
+
+Acquire::http::Proxy "http://GBINET:LyRE*17*@10.99.211.61:8080";
+Acquire::https::Proxy "http://GBINET:LyRE*17*@10.99.211.61:8080";
+Acquire::ftp::Proxy "http://GBINET:LyRE*17*@10.99.211.61:8080";
